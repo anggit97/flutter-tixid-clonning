@@ -19,9 +19,17 @@ class _MoviesScreenState extends State<MoviesScreen> {
           _nowShowingCell(),
           _shareCodeAndGetPointCell(),
           _videosCell(),
-          Divider(height: 3, ),
+          Divider(
+            height: 3,
+          ),
           _spotLightCell(),
-          Divider(height: 3, ),
+          Divider(
+            height: 3,
+          ),
+          _tixNowCell(),
+          Divider(
+            height: 3,
+          ),
           _comingSoonCell(),
         ],
       ),
@@ -47,8 +55,9 @@ class _MoviesScreenState extends State<MoviesScreen> {
                 child: Text(
                   "JAKARTA",
                   style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black,),
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
@@ -294,7 +303,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
 
   _spotLightCell() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 30, top: 20,),
+      padding: const EdgeInsets.only(
+        bottom: 30,
+        top: 20,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -397,14 +409,13 @@ class _MoviesScreenState extends State<MoviesScreen> {
                       Text(
                         "15",
                         maxLines: 1,
-                        style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         "April 2019",
                         maxLines: 1,
-                        style:
-                        TextStyle(fontSize: 10, color: Colors.grey),
+                        style: TextStyle(fontSize: 10, color: Colors.grey),
                       ),
                     ],
                   )
@@ -425,32 +436,31 @@ class _MoviesScreenState extends State<MoviesScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(left: 16, right: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    "Coming Soon",
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+              padding: const EdgeInsets.only(left: 16, right: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      "Coming Soon",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                Text(
-                  "More",
-                  style: TextStyle(color: Colors.grey, fontSize: 14),
-                ),
-                Image.asset(
-                  "images/ic_chevron_right_grey.png",
-                  width: 24,
-                  height: 24,
-                ),
-              ],
-            )
-          ),
+                  Text(
+                    "More",
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                  ),
+                  Image.asset(
+                    "images/ic_chevron_right_grey.png",
+                    width: 24,
+                    height: 24,
+                  ),
+                ],
+              )),
           Container(
             height: 300,
             child: ListView(
@@ -505,6 +515,172 @@ class _MoviesScreenState extends State<MoviesScreen> {
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  _tixNowCell() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, bottom: 30),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+              padding: const EdgeInsets.only(left: 16, right: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      "TIX Now",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Text(
+                    "More",
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                  ),
+                  Image.asset(
+                    "images/ic_chevron_right_grey.png",
+                    width: 24,
+                    height: 24,
+                  ),
+                ],
+              )),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.only(left: 16, right: 10),
+            child: ListView(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              children: <Widget>[
+                _tixNowItem(),
+                _tixNowItem(),
+                _tixNowItem(),
+                _tixNowItem(),
+                _tixNowItem(),
+                _tixNowItem(),
+                _tixNowItem(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _tixNowItem() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            width: 84,
+            height: 84,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage("images/bg_my_loyal_tix_detail.png"))),
+          ),
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        "PRE-SALE Marvel Studios Avengers: End Game",
+                        maxLines: 2,
+                        style: TextStyle(fontSize: 14, color: Colors.black),
+                      ),
+                    ),
+                    Chip(
+                        elevation: 5,
+                        label: Text(
+                          "News",
+                          style: TextStyle(fontSize: 10),
+                          maxLines: 1,
+                        ))
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Expanded(
+                          child: Row(
+                        children: <Widget>[
+                          Image.asset(
+                            "images/ic_content_view.png",
+                            width: 14,
+                            height: 14,
+                            fit: BoxFit.contain,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Text(
+                              "833",
+                              style: TextStyle(color: Colors.grey, fontSize: 12),
+                            ),
+                          )
+                        ],
+                      )),
+                      Expanded(
+                          child: Row(
+                        children: <Widget>[
+                          Image.asset(
+                            "images/ic_content_like.png",
+                            width: 14,
+                            height: 14,
+                            fit: BoxFit.contain,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Text(
+                              "833",
+                              style: TextStyle(color: Colors.grey, fontSize: 12),
+                            ),
+                          )
+                        ],
+                      )),
+                      Expanded(
+                          child: Text(
+                            "By Tix ID Team",
+                            maxLines: 1,
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          )),
+                      Expanded(
+                          child: Text(
+                            "Just Now",
+                            maxLines: 1,
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          )),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ))
         ],
       ),
     );

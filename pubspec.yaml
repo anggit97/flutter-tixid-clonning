@@ -59,6 +59,9 @@ flutter:
     - images/ic_play_dark.png
     - images/ic_invitation_code_homepage.png
     - images/ic_home_page_more_button.png
+    - images/ic_arrow.png
+    - images/ic_content_like.png
+    - images/ic_content_view.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

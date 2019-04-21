@@ -9,7 +9,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   var _cIndex = 0;
 
   List<Widget> _children = [
@@ -69,33 +68,36 @@ class _MainScreenState extends State<MainScreen> {
         BottomNavigationBarItem(
             icon: Image.asset(
               "images/icon_theater.png",
-              height: 32,
-              width: 32,
+              height: 24,
+              width: 24,
             ),
             title: Text(
               "Movies",
-              style: TextStyle(color: Color.fromRGBO(153, 164, 170, 1)),
+              style: TextStyle(
+                  color: Color.fromRGBO(153, 164, 170, 1), fontSize: 12),
             )),
         BottomNavigationBarItem(
           icon: Image.asset(
             "images/icon_cinema_moviedetail.png",
-            height: 32,
-            width: 32,
+            height: 24,
+            width: 24,
           ),
           title: Text(
             "Cinemas",
-            style: TextStyle(color: Color.fromRGBO(153, 164, 170, 1)),
+            style: TextStyle(
+                color: Color.fromRGBO(153, 164, 170, 1), fontSize: 12),
           ),
         ),
         BottomNavigationBarItem(
             icon: Image.asset(
               "images/icon_ticket_unselected.png",
-              height: 32,
-              width: 32,
+              height: 24,
+              width: 24,
             ),
             title: Text(
               "Tickets",
-              style: TextStyle(color: Color.fromRGBO(153, 164, 170, 1)),
+              style: TextStyle(
+                  color: Color.fromRGBO(153, 164, 170, 1), fontSize: 12),
             )),
       ]),
     );

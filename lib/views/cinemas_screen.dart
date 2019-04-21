@@ -9,14 +9,14 @@ class _CinemasScreenState extends State<CinemasScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _pickLocationCell(),
-        ],
-      )
-    );
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _pickLocationCell(),
+        _cinemasListCell(),
+      ],
+    ));
   }
 
   _pickLocationCell() {
@@ -52,6 +52,47 @@ class _CinemasScreenState extends State<CinemasScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  _cinemasListCell() {
+    return Expanded(
+      child: ListView(
+        scrollDirection: Axis.vertical,
+        children: <Widget>[
+          _cinemasListItem(),
+          Divider(),
+          _cinemasListItem(),
+          Divider(),
+          _cinemasListItem(),
+          Divider(),
+          _cinemasListItem(),
+          Divider(),
+          _cinemasListItem(),
+          Divider(),
+          _cinemasListItem(),
+          Divider(),
+          _cinemasListItem(),
+          Divider(),
+          _cinemasListItem(),
+          Divider(),
+          _cinemasListItem(),
+          Divider(),
+          _cinemasListItem(),
+          Divider(),
+        ],
+      ),
+    );
+  }
+
+  _cinemasListItem() {
+    return ListTile(
+      leading: Text(
+        "AEON Mall BSD CITY XXI",
+        maxLines: 1,
+        style: TextStyle(color: Colors.black, fontSize: 14),
+      ),
+      trailing: Image.asset("images/ic_arrow.png", width: 14, height: 14,),
     );
   }
 }
