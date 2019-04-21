@@ -640,7 +640,8 @@ class _MoviesScreenState extends State<MoviesScreen> {
                             padding: const EdgeInsets.only(left: 5),
                             child: Text(
                               "833",
-                              style: TextStyle(color: Colors.grey, fontSize: 12),
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 12),
                             ),
                           )
                         ],
@@ -658,23 +659,24 @@ class _MoviesScreenState extends State<MoviesScreen> {
                             padding: const EdgeInsets.only(left: 5),
                             child: Text(
                               "833",
-                              style: TextStyle(color: Colors.grey, fontSize: 12),
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 12),
                             ),
                           )
                         ],
                       )),
                       Expanded(
                           child: Text(
-                            "By Tix ID Team",
-                            maxLines: 1,
-                            style: TextStyle(color: Colors.grey, fontSize: 12),
-                          )),
+                        "By Tix ID Team",
+                        maxLines: 1,
+                        style: TextStyle(color: Colors.grey, fontSize: 12),
+                      )),
                       Expanded(
                           child: Text(
-                            "Just Now",
-                            maxLines: 1,
-                            style: TextStyle(color: Colors.grey, fontSize: 12),
-                          )),
+                        "Just Now",
+                        maxLines: 1,
+                        style: TextStyle(color: Colors.grey, fontSize: 12),
+                      )),
                     ],
                   ),
                 )

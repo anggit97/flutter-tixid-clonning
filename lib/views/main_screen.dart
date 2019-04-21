@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'movies_screen.dart';
 import 'cinemas_screen.dart';
+import 'tickets_screen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> _children = [
     MoviesScreen(),
     CinemasScreen(),
-    CinemasScreen(),
+    TicketScreen(),
   ];
 
   incrementTab(index) {
@@ -47,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
         child: Image.asset("images/logo_dark_beta.png"),
       ),
       backgroundColor: Colors.white,
-      elevation: 3,
+      elevation: 1,
       centerTitle: true,
       actions: <Widget>[
         Image.asset(
@@ -64,42 +65,45 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: Center(child: _children[_cIndex]),
       backgroundColor: Colors.white,
-      bottomNavigationBar: BottomNavigationBar(onTap: incrementTab, items: [
-        BottomNavigationBarItem(
-            icon: Image.asset(
-              "images/icon_theater.png",
-              height: 24,
-              width: 24,
+      bottomNavigationBar: BottomNavigationBar(
+          onTap: incrementTab,
+          backgroundColor: Colors.white,
+          items: [
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                  "images/icon_theater.png",
+                  height: 24,
+                  width: 24,
+                ),
+                title: Text(
+                  "Movies",
+                  style: TextStyle(
+                      color: Color.fromRGBO(153, 164, 170, 1), fontSize: 12),
+                )),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "images/icon_cinema_moviedetail.png",
+                height: 24,
+                width: 24,
+              ),
+              title: Text(
+                "Cinemas",
+                style: TextStyle(
+                    color: Color.fromRGBO(153, 164, 170, 1), fontSize: 12),
+              ),
             ),
-            title: Text(
-              "Movies",
-              style: TextStyle(
-                  color: Color.fromRGBO(153, 164, 170, 1), fontSize: 12),
-            )),
-        BottomNavigationBarItem(
-          icon: Image.asset(
-            "images/icon_cinema_moviedetail.png",
-            height: 24,
-            width: 24,
-          ),
-          title: Text(
-            "Cinemas",
-            style: TextStyle(
-                color: Color.fromRGBO(153, 164, 170, 1), fontSize: 12),
-          ),
-        ),
-        BottomNavigationBarItem(
-            icon: Image.asset(
-              "images/icon_ticket_unselected.png",
-              height: 24,
-              width: 24,
-            ),
-            title: Text(
-              "Tickets",
-              style: TextStyle(
-                  color: Color.fromRGBO(153, 164, 170, 1), fontSize: 12),
-            )),
-      ]),
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                  "images/icon_ticket_unselected.png",
+                  height: 24,
+                  width: 24,
+                ),
+                title: Text(
+                  "Tickets",
+                  style: TextStyle(
+                      color: Color.fromRGBO(153, 164, 170, 1), fontSize: 12),
+                )),
+          ]),
     );
   }
 }
