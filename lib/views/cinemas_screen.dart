@@ -6,31 +6,51 @@ class CinemasScreen extends StatefulWidget {
 }
 
 class _CinemasScreenState extends State<CinemasScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.topLeft,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("images/bg_my_loyal_tix_detail.png"),
-                    fit: BoxFit.cover)),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Image.asset(
-                "images/logo_beta_light.png",
-                fit: BoxFit.contain,
+          _pickLocationCell(),
+        ],
+      )
+    );
+  }
+
+  _pickLocationCell() {
+    return Container(
+      decoration: BoxDecoration(color: Color.fromRGBO(250, 250, 251, 1)),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: <Widget>[
+            Image.asset(
+              "images/icon_location_pulltheater.png",
+              fit: BoxFit.contain,
+              width: 16,
+              height: 16,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  "JAKARTA",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
+            Image.asset(
+              "images/ic_triangle_drop_down.png",
+              width: 16,
+              height: 16,
+            )
+          ],
+        ),
       ),
     );
   }

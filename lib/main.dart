@@ -9,6 +9,7 @@ class TixApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Tix Clone",
+      theme: ThemeData(fontFamily: "sfui"),
       home: SplashScreen(),
     );
   }
