@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import 'movies_detail_screen.dart';
+
 class MoviesScreen extends StatefulWidget {
   @override
   _MoviesScreenState createState() => _MoviesScreenState();
@@ -153,16 +155,21 @@ class _MoviesScreenState extends State<MoviesScreen> {
           builder: (BuildContext context) {
             return Column(
               children: <Widget>[
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 250,
-                  margin: EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image:
-                              AssetImage("images/bg_my_loyal_tix_detail.png"),
-                          fit: BoxFit.fill),
-                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                GestureDetector(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 250,
+                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image:
+                                AssetImage("images/bg_my_loyal_tix_detail.png"),
+                            fit: BoxFit.fill),
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                  ),
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailScreen()));
+                  },
                 ),
                 Center(
                     child: Padding(
