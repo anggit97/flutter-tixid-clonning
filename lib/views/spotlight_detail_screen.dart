@@ -24,6 +24,15 @@ class _SpotlightDetailScreenState extends State<SpotlightDetailScreen> {
           )
         ],
       ),
+      body: Column(
+        children: <Widget>[
+          Image.asset(
+            "images/bg_my_loyal_tix_detail.png",
+            height: 200,
+            fit: BoxFit.fill,
+          )
+        ],
+      ),
     );
   }
 }

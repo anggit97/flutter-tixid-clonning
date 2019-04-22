@@ -1,16 +1,15 @@
 # tix_app
 
-Cloning of tix app
+Cloning TIX ID in Flutter (Currently design only, next i will grab the movies from IMDB api for free)
 
-## Getting Started
+## Feature
+* Splash Screen
+* Movies
+* Cinemas
+* Ticket
 
-This project is a starting point for a Flutter application.
+## Demo
+Here is the link to see the demo of this app
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/xUAu92MLXUE/0.jpg)](https://www.youtube.com/watch?v=xUAu92MLXUE)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+feel free to fork and learn this project, thanks!
