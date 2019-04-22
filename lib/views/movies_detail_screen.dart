@@ -19,6 +19,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             backgroundColor: Colors.white,
             expandedHeight: 375,
             pinned: true,
+            snap: true,
+            floating: true,
             title: Text("Avengers : End Game"),
             flexibleSpace: Stack(
               children: <Widget>[

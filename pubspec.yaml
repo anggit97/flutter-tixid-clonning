@@ -69,6 +69,7 @@ flutter:
     - images/ic_bg_dialog_qrcode_top.png
     - images/ic_default_btn_back_moviedetail.png
     - images/paper_gold.png
+    - images/movie.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

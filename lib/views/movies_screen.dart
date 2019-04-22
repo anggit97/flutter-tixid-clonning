@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'movies_detail_screen.dart';
+import 'movies_list_screen.dart';
+import 'spotlight_detail_screen.dart';
 
 class MoviesScreen extends StatefulWidget {
   @override
@@ -226,36 +228,41 @@ class _MoviesScreenState extends State<MoviesScreen> {
   }
 
   _videosCell() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Text(
-              "Videos",
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MoviesListScreen()));
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(top: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Text(
+                "Videos",
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          Container(
-            height: 250,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                _videosItem(),
-                _videosItem(),
-                _videosItem(),
-                _videosItem(),
-                _videosItem(),
-              ],
+            Container(
+              height: 250,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  _videosItem(),
+                  _videosItem(),
+                  _videosItem(),
+                  _videosItem(),
+                  _videosItem(),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -309,39 +316,44 @@ class _MoviesScreenState extends State<MoviesScreen> {
   }
 
   _spotLightCell() {
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 30,
-        top: 20,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Text(
-              "Spotlight",
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SpotlightDetailScreen()));
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(
+          bottom: 30,
+          top: 20,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Text(
+                "Spotlight",
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          Container(
-            height: 250,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                _spotlightItem(),
-                _spotlightItem(),
-                _spotlightItem(),
-                _spotlightItem(),
-                _spotlightItem(),
-              ],
+            Container(
+              height: 250,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  _spotlightItem(),
+                  _spotlightItem(),
+                  _spotlightItem(),
+                  _spotlightItem(),
+                  _spotlightItem(),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
