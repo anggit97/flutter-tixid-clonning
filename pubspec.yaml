@@ -65,6 +65,10 @@ flutter:
     - images/img_empty_mytiket.png
     - images/ic_location_gray_covered.png
     - images/ic_ticket_gray_covered.png
+    - images/ic_already_shown.png
+    - images/ic_bg_dialog_qrcode_top.png
+    - images/ic_default_btn_back_moviedetail.png
+    - images/paper_gold.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
