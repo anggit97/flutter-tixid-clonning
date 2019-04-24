@@ -1,5 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:tix_app/src/blocs/now_playing_bloc.dart';
+import 'package:tix_app/src/models/now_playing_models.dart';
+import 'package:tix_app/src/blocs/genres_bloc.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 import 'movies_detail_screen.dart';
 import 'movies_list_screen.dart';
@@ -11,31 +17,54 @@ class MoviesScreen extends StatefulWidget {
 }
 
 class _MoviesScreenState extends State<MoviesScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+
+  @override
+  void initState() {
+    super.initState();
+    bloc.fetchNowPlayingMovies();
+    bloc.fetchPopularMovie();
+    genreBloc.fetchAllGenres();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    bloc.dispose();
+    genreBloc.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        children: <Widget>[
-          _pickLocationCell(),
-          _carouselMoviesCell(),
-          _nowShowingCell(),
-          _shareCodeAndGetPointCell(),
-          _videosCell(),
-          Divider(
-            height: 3,
-          ),
-          _spotLightCell(),
-          Divider(
-            height: 3,
-          ),
-          _tixNowCell(),
-          Divider(
-            height: 3,
-          ),
-          _comingSoonCell(),
-        ],
+      body: LiquidPullToRefresh(
+        key: _refreshIndicatorKey,
+        onRefresh: _handleRefresh,
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          children: <Widget>[
+            _pickLocationCell(),
+            _carouselMoviesCell(),
+            _nowShowingCell(),
+            _shareCodeAndGetPointCell(),
+            _videosCell(),
+            Divider(
+              height: 3,
+            ),
+            _spotLightCell(),
+            Divider(
+              height: 3,
+            ),
+            _tixNowCell(),
+            Divider(
+              height: 3,
+            ),
+            _comingSoonCell(),
+          ],
+        ),
       ),
     );
   }
@@ -144,57 +173,21 @@ class _MoviesScreenState extends State<MoviesScreen> {
   }
 
   _nowShowingCarousel() {
-    return CarouselSlider(
-      height: 320,
-      viewportFraction: 0.5,
-      scrollDirection: Axis.horizontal,
-      autoPlay: false,
-      aspectRatio: 16 / 9,
-      initialPage: 0,
-      enableInfiniteScroll: true,
-      items: [1, 2, 3, 4, 5].map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return Column(
-              children: <Widget>[
-                GestureDetector(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 250,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image:
-                                AssetImage("images/bg_my_loyal_tix_detail.png"),
-                            fit: BoxFit.fill),
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
-                  ),
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailScreen()));
-                  },
-                ),
-                Center(
-                    child: Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Text(
-                    "Judul Film $i",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                )),
-                Center(
-                    child: Padding(
-                  padding: const EdgeInsets.only(top: 0),
-                  child: Text(
-                    "Genre film $i",
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
-                  ),
-                )),
-              ],
+    return StreamBuilder(
+        stream: bloc.nowPlaying,
+        builder:
+            (BuildContext context, AsyncSnapshot<NowPlayingMovies> snapshot) {
+          if (snapshot.hasData) {
+            return _nowShowingCarouselBuild(snapshot.data.results);
+          } else if (snapshot.hasError) {
+            Text(snapshot.error.toString());
+          } else {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: CircularProgressIndicator(),
             );
-          },
-        );
-      }).toList(),
-    );
+          }
+        });
   }
 
   _shareCodeAndGetPointCell() {
@@ -229,8 +222,9 @@ class _MoviesScreenState extends State<MoviesScreen> {
 
   _videosCell() {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => MoviesListScreen()));
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => MoviesListScreen()));
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 16),
@@ -249,25 +243,28 @@ class _MoviesScreenState extends State<MoviesScreen> {
               ),
             ),
             Container(
-              height: 250,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  _videosItem(),
-                  _videosItem(),
-                  _videosItem(),
-                  _videosItem(),
-                  _videosItem(),
-                ],
-              ),
-            ),
+                height: 250,
+                child: StreamBuilder(
+                    stream: bloc.moviePopular,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<NowPlayingMovies> snapshot) {
+                      if (snapshot.hasData) {
+                        return _buildListVideo(snapshot.data);
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Text(snapshot.error),
+                        );
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    })),
           ],
         ),
       ),
     );
   }
 
-  _videosItem() {
+  _videosItem(Result result) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 0),
       child: Column(
@@ -279,7 +276,8 @@ class _MoviesScreenState extends State<MoviesScreen> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 image: DecorationImage(
-                    image: AssetImage("images/bg_my_loyal_tix_detail.png"),
+                    image: NetworkImage(
+                        "https://image.tmdb.org/t/p/original/${result.backdropPath}"),
                     fit: BoxFit.cover)),
             child: Center(
               child: Image.asset(
@@ -295,14 +293,14 @@ class _MoviesScreenState extends State<MoviesScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "John Wick: Chapter 3 Prebalium End Game",
+                  result.title,
                   maxLines: 2,
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 7),
                   child: Text(
-                    "2K plays | 19 April 2019",
+                    "2K plays | ${result.releaseDate}",
                     maxLines: 1,
                     style: TextStyle(fontSize: 12),
                   ),
@@ -317,8 +315,9 @@ class _MoviesScreenState extends State<MoviesScreen> {
 
   _spotLightCell() {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SpotlightDetailScreen()));
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SpotlightDetailScreen()));
       },
       child: Padding(
         padding: const EdgeInsets.only(
@@ -705,5 +704,97 @@ class _MoviesScreenState extends State<MoviesScreen> {
         ],
       ),
     );
+  }
+
+  _nowShowingCarouselBuild(List<Result> results) {
+    return CarouselSlider(
+      height: 320,
+      viewportFraction: 0.5,
+      scrollDirection: Axis.horizontal,
+      autoPlay: false,
+      aspectRatio: 16 / 9,
+      initialPage: 0,
+      enableInfiniteScroll: true,
+      items: results.map((i) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Column(
+              children: <Widget>[
+                GestureDetector(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 250,
+                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "https://image.tmdb.org/t/p/original/${i.backdropPath}"),
+                            fit: BoxFit.cover),
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MovieDetailScreen()));
+                  },
+                ),
+                Center(
+                    child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    i.title,
+                    maxLines: 1,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                )),
+                Center(
+                    child: Padding(
+                        padding: const EdgeInsets.only(top: 0),
+                        child: Text(
+                          i.genresNames,
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14,
+                          ),
+                        ))),
+              ],
+            );
+          },
+        );
+      }).toList(),
+    );
+  }
+
+  _buildListVideo(NowPlayingMovies data) {
+    return ListView.builder(
+        itemCount: data.results.length,
+        scrollDirection: Axis.horizontal,
+        physics: BouncingScrollPhysics(),
+        itemBuilder: (BuildContext context, int i) {
+          return _videosItem(data.results[i]);
+        });
+  }
+
+  Future<void> _handleRefresh() {
+    final Completer<void> completer = Completer<void>();
+    Timer(const Duration(seconds: 3), () {
+      completer.complete();
+    });
+
+    bloc.fetchNowPlayingMovies();
+    bloc.fetchPopularMovie();
+    genreBloc.fetchAllGenres();
+
+    return completer.future.then<void>((_) {
+      _scaffoldKey.currentState?.showSnackBar(SnackBar(
+          content: const Text('Refresh complete'),
+          action: SnackBarAction(
+              label: 'RETRY',
+              onPressed: () {
+                _refreshIndicatorKey.currentState.show();
+              })));
+    });
   }
 }

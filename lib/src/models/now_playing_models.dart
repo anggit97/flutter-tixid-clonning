@@ -71,6 +71,7 @@ class Result {
   OriginalLanguage originalLanguage;
   String originalTitle;
   List<int> genreIds;
+  String genresNames;
   String backdropPath;
   bool adult;
   String overview;
@@ -91,6 +92,7 @@ class Result {
     this.adult,
     this.overview,
     this.releaseDate,
+    this.genresNames,
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => new Result(
@@ -121,6 +123,7 @@ class Result {
     "original_language": originalLanguageValues.reverse[originalLanguage],
     "original_title": originalTitle,
     "genre_ids": new List<dynamic>.from(genreIds.map((x) => x)),
+    "genre_names": genresNames,
     "backdrop_path": backdropPath == null ? null : backdropPath,
     "adult": adult,
     "overview": overview,

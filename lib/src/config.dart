@@ -1,5 +1,5 @@
 class ConfigApiGlobals{
-  String _baseUrl = "https://api.themoviedb.org/3/movie/";
+  String _baseUrl = "https://api.themoviedb.org/3/";
   String get baseUrl => _baseUrl;
 
   String _apiKey = "00fadd6af89412de4c1a3ecd7fe631f6";
