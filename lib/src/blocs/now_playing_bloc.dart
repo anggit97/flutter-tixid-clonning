@@ -5,8 +5,8 @@ import 'package:tix_app/src/models/genre_models.dart';
 
 class NowPlayingBloc {
   final _repository = Repository();
-  final _nowPlayingFetcher = PublishSubject<NowPlayingMovies>();
-  final _popularMovie = PublishSubject<NowPlayingMovies>();
+  final _nowPlayingFetcher = BehaviorSubject<NowPlayingMovies>();
+  final _popularMovie = BehaviorSubject<NowPlayingMovies>();
 
   Observable<NowPlayingMovies> get nowPlaying => _nowPlayingFetcher.stream;
   Observable<NowPlayingMovies> get moviePopular => _popularMovie.stream;
